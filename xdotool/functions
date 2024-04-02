@@ -34,7 +34,7 @@ is-terminal-active() {
 }
 
 function zsh-notify() {
-    local message type time_elapsed title icon
+    local message type time_elapsed title icon body
 
     if ! command -v notify-send > /dev/null 2>&1; then
         echo cannot find notify-send in \$PATH 1>&2
@@ -52,7 +52,7 @@ function zsh-notify() {
     type="$1"
     time_elapsed="$(format-time "$2")"
     exit_code="$3"
-    message=$(<&0)
+    command=$(<&0)
 
     zstyle -s ':notify:' "$type"-sound notification_sound
     zstyle -s ':notify:' "$type"-icon icon
@@ -60,8 +60,10 @@ function zsh-notify() {
     zstyle -s ':notify:' expire-time expire_time
 
     zstyle -s ':notify:' "$type"-title title
+    zstyle -s ':notify:' message-body body
 
     title=$(notification-format "$title" time_elapsed "$time_elapsed" exit-code "$exit_code")
+    message=$(notification-format "$body" command "$command")
 
     if [[ -n "$icon" ]]; then
         icon_option="-i $icon"

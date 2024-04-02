@@ -104,15 +104,13 @@ function zsh-notify-after-command() {
     zstyle -s ':notify:' notifier notifier
     zstyle -s ':notify:' message-body body
 
-    body=$(notification-format "$body" command "$zsh_notify_last_command")
-
     touch "$error_log"
     (
         (( time_elapsed = EPOCHSECONDS - zsh_notify_start_time ))
         if _zsh-notify-should-notify "$last_status" "$time_elapsed"; then
             local result
             result="$(((last_status == 0)) && echo success || echo error)"
-            "$notifier" "$result" "$time_elapsed" "$last_status" <<< "$body"
+            "$notifier" "$result" "$time_elapsed" "$last_status" <<< "$zsh_notify_last_command"
         fi
     )  2>&1 | sd '^' 'zsh-notify: ' >> "$error_log"
 
