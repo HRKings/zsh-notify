@@ -112,7 +112,7 @@ function zsh-notify-after-command() {
             result="$(((last_status == 0)) && echo success || echo error)"
             "$notifier" "$result" "$time_elapsed" "$last_status" <<< "$zsh_notify_last_command"
         fi
-    )  2>&1 | sd '^' 'zsh-notify: ' >> "$error_log"
+    )  2>&1 | sd '^[^\n]' 'zsh-notify: ' >> "$error_log"
 
     unset zsh_notify_last_command zsh_notify_start_time
 }

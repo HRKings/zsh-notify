@@ -40,7 +40,7 @@ function notification-format {
     while [[ $# -gt 0 ]]; do
       k="$1"
       v="$2"
-      result=$(echo "$result" | sd "#{$k}" "$v")
+      result=$(echo "$result" | sd "#\{$k\}" "$v")
       shift
       shift
     done
