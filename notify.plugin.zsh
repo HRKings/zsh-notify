@@ -18,6 +18,7 @@ zstyle ':notify:*' notifier zsh-notify
 zstyle ':notify:*' expire-time 0
 zstyle ':notify:*' app-name ''
 zstyle ':notify:*' notifier zsh-notify
+zstyle ':notify:*' message-body 'Command: #{command}'
 zstyle ':notify:*' success-title '#win (in #{time_elapsed})'
 zstyle ':notify:*' success-sound ''
 zstyle ':notify:*' success-icon ''
@@ -97,10 +98,13 @@ function zsh-notify-before-command() {
 function zsh-notify-after-command() {
     local last_status=$?
 
-    local error_log notifier now time_elapsed
+    local error_log notifier now time_elapsed body
 
     zstyle -s ':notify:' error-log error_log
     zstyle -s ':notify:' notifier notifier
+    zstyle -s ':notify:' message-body body
+
+    body=$(notification-format "$body" command "$zsh_notify_last_command")
 
     touch "$error_log"
     (
@@ -108,7 +112,7 @@ function zsh-notify-after-command() {
         if _zsh-notify-should-notify "$last_status" "$time_elapsed"; then
             local result
             result="$(((last_status == 0)) && echo success || echo error)"
-            "$notifier" "$result" "$time_elapsed" <<< "$zsh_notify_last_command"
+            "$notifier" "$result" "$time_elapsed" "$last_status" <<< "$body"
         fi
     )  2>&1 | sd '^' 'zsh-notify: ' >> "$error_log"
 

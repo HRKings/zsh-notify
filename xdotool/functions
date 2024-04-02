@@ -51,6 +51,7 @@ function zsh-notify() {
 
     type="$1"
     time_elapsed="$(format-time "$2")"
+    exit_code="$3"
     message=$(<&0)
 
     zstyle -s ':notify:' "$type"-sound notification_sound
@@ -58,7 +59,9 @@ function zsh-notify() {
     zstyle -s ':notify:' app-name app_name
     zstyle -s ':notify:' expire-time expire_time
 
-    title=$(notification-title "$type" time_elapsed "$time_elapsed")
+    zstyle -s ':notify:' "$type"-title title
+
+    title=$(notification-format "$title" time_elapsed "$time_elapsed" exit-code "$exit_code")
 
     if [[ -n "$icon" ]]; then
         icon_option="-i $icon"

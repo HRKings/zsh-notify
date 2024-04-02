@@ -29,25 +29,23 @@ function is-current-tmux-pane-active {
     return 1
 }
 
-# Retrieve the title template from zstyle by type from first argument (one of 'success' or 'error')
+# Retrieve the format template from zstyle by type from first argument (one of 'success' or 'error')
 # and replace every #{placeholder} from key/value pairs passed in the rest of arguments
-function notification-title {
-    local type title k v
+function notification-format {
+    local result k v
 
-    type="$1"
+    result="$1"
     shift
-
-    zstyle -s ':notify:' "$type"-title title 
 
     while [[ $# -gt 0 ]]; do
       k="$1"
       v="$2"
-      title=$(echo $title | sed "s/#{$k}/$v/")
+      result=$(echo "$result" | sd "#{$k}" "$v")
       shift
       shift
     done
 
-    echo $title
+    echo $result
 }
 
 # format-time takes a number of seconds as first argument and format it
