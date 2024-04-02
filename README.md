@@ -3,6 +3,10 @@ zsh-notify
 
 Desktop notifications for long-running commands in ZSH.
 
+An alternative to [marzocchi/zsh-notify](https://github.com/marzocchi/zsh-notify). With support for the command in the notification body and the exit code in the title.
+
+Additionally it used `rg` instead of `grep` and `sd` in place of `sed`.
+
 Supported terminals
 ---
 
@@ -10,7 +14,7 @@ Supported terminals
 - On Linux (and possibly other systems): any terminal application should be
   supported as `xdotool` and `wmctrl` are used to query and modify windows
   state.
-  
+
 Setup and usage
 ---
 
@@ -58,10 +62,10 @@ sourcing `notify.plugin.zsh`.
 
 - Change the notifications icons for failure or success. Provide the path to an
   image, or an URL if you are on macOS.
-        
+
         zstyle ':notify:*' error-icon "/path/to/error-icon.png"
         zstyle ':notify:*' success-icon "/path/to/success-icon.png"
-    
+
     [Try this][dogefy.sh]. Wow.
 
 - Play sounds with error and success notifications when using the built-in
@@ -135,7 +139,7 @@ sourcing `notify.plugin.zsh`.
 
         zstyle ':notify:*' check-focus no
 
-[terminal-notifier]: https://github.com/alloy/terminal-notifier 
+[terminal-notifier]: https://github.com/alloy/terminal-notifier
 [libnotify]: https://github.com/GNOME/libnotify
 [iterm2]: http://www.iterm2.com/
 [dogefy.sh]: https://gist.github.com/marzocchi/14c47a49643389029a2026b4d4fec7ae
