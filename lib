@@ -20,7 +20,7 @@ function current-tty {
 function is-current-tmux-pane-active {
     is-inside-tmux || return 1
 
-    local active_pane_id=$(tmux list-windows -F '#{window_active} #{pane_id}' | grep -i '^1' | awk '{ print $2 }')
+    local active_pane_id=$(tmux list-windows -F '#{window_active} #{pane_id}' | rg -i '^1' | choose 1)
 
     if [[ "$TMUX_PANE" == "$active_pane_id" ]]; then
         return 0

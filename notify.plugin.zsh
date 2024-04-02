@@ -50,7 +50,7 @@ function _zsh-notify-is-command-blacklisted() {
     fi
     local cmd
     cmd="$(_zsh-notify-expand-command-aliases "$zsh_notify_last_command")"
-    print -rn -- "$cmd" | grep -q -E "$blacklist_regex"
+    print -rn -- "$cmd" | rg -q "$blacklist_regex"
 }
 
 function _zsh-notify-is-ssh() {
@@ -110,7 +110,7 @@ function zsh-notify-after-command() {
             result="$(((last_status == 0)) && echo success || echo error)"
             "$notifier" "$result" "$time_elapsed" <<< "$zsh_notify_last_command"
         fi
-    )  2>&1 | sed 's/^/zsh-notify: /' >> "$error_log"
+    )  2>&1 | sd '^' 'zsh-notify: ' >> "$error_log"
 
     unset zsh_notify_last_command zsh_notify_start_time
 }
