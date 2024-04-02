@@ -7,6 +7,8 @@ An alternative to [marzocchi/zsh-notify](https://github.com/marzocchi/zsh-notify
 
 Additionally it used `rg` instead of `grep` and `sd` in place of `sed`.
 
+WARNING: The original plugin works in MacOS (iTerm), I don't own an mac, so this version is not tested in apple devices.
+
 Supported terminals
 ---
 
