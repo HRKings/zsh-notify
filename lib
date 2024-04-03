@@ -55,11 +55,11 @@ function format-time() {
 	t="$1"
 
 	if [[ "$t" -lt 60 ]]; then
-		format="%ss"
+		zstyle -s ':notify:*' time-only-seconds format
 	elif [[ "$t" -lt 3600 ]]; then
-		format="%M:%S"
+		zstyle -s ':notify:*' time-with-minutes format
 	else
-		format="%H:%M:%S"
+		zstyle -s ':notify:*' time-with-hours format
 	fi
 
 	zmodload -e zsh/datetime || zmodload zsh/datetime
