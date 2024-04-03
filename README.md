@@ -3,7 +3,7 @@ zsh-notify
 
 Desktop notifications for long-running commands in ZSH.
 
-An alternative to [marzocchi/zsh-notify](https://github.com/marzocchi/zsh-notify). With support for the command in the notification body and the exit code in the title.
+A fork of [marzocchi/zsh-notify](https://github.com/marzocchi/zsh-notify). With support for the command in the notification body, the exit code in the title and custom time formatting.
 
 Additionally it used `rg` instead of `grep` and `sd` in place of `sed`.
 
@@ -12,7 +12,7 @@ WARNING: The original plugin works in MacOS (iTerm), I don't own an mac, so this
 Supported terminals
 ---
 
-- On macOS: Terminal.app or [iTerm2][iterm2];
+- On macOS?: Terminal.app or [iTerm2][iterm2];
 - On Linux (and possibly other systems): any terminal application should be
   supported as `xdotool` and `wmctrl` are used to query and modify windows
   state.
