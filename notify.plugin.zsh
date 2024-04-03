@@ -25,7 +25,7 @@ zstyle ':notify:*' success-icon ''
 zstyle ':notify:*' error-title '#fail (in #{time_elapsed})'
 zstyle ':notify:*' error-sound ''
 zstyle ':notify:*' error-icon ''
-zstyle ':notify:*' time-only-seconds format '%Ss'
+zstyle ':notify:*' time-only-seconds format '%ss'
 zstyle ':notify:*' time-with-minutes format '%Mmin %Ss'
 zstyle ':notify:*' time-with-hours format '%Hh %Mmin %Ss'
 zstyle ':notify:*' disable-urgent no
